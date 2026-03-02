@@ -416,7 +416,7 @@ int OEMSocket_Accept(int s, struct sockaddr *addr, uint16 *paddrlen, int16 *perr
 }
 
 int OEMSocket_AsyncSelect() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_Bind(int s, const struct sockaddr *addr, int addrlen, int16 *perr) {
@@ -436,39 +436,39 @@ int OEMSocket_Connect(int s, const struct sockaddr *addr, int addrlen, int16 *pe
 }
 
 int OEMSocket_GetDelayedAck() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetDisableFlowFwding() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetIPTTL() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetIPToS() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetIPv6TrafficClass() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetKeepAlive() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetLinger() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetNativeDescriptor() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetNextEvent() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetNoDelay(int s, boolean *enabled, int16 *perr) {
@@ -488,7 +488,7 @@ int OEMSocket_GetPeerName(int s, struct sockaddr *addr, uint16 *paddrlen, int16 
 }
 
 int OEMSocket_GetRcvBuf() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetReuseAddr(int s, boolean *enabled, int16 *perr) {
@@ -500,19 +500,19 @@ int OEMSocket_GetReuseAddr(int s, boolean *enabled, int16 *perr) {
 }
 
 int OEMSocket_GetSACK() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetSDBAckCB() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetSDBAckInfo() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetSndBuf() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetSockName(int s, struct sockaddr *addr, uint16 *paddrlen, int16 *perr) {
@@ -524,11 +524,11 @@ int OEMSocket_GetSockName(int s, struct sockaddr *addr, uint16 *paddrlen, int16 
 }
 
 int OEMSocket_GetTCPMaxSegmentSize() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_GetTimeStamp() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_Listen(int s, int backlog, int16 *perr) {
@@ -550,7 +550,7 @@ int OEMSocket_Read(int s, void *buf, int len, int16 *perr) {
 }
 
 int OEMSocket_Readv() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_RecvFrom(int s, void *buf, int len, int flags, struct sockaddr *from, uint16 *pfromlen, int16 *perr) {
@@ -568,35 +568,35 @@ int OEMSocket_SendTo(int s, const void *buf, int len, int flags, const struct so
 }
 
 int OEMSocket_SetDelayedAck() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetDisableFlowFwding() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetIPTTL() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetIPToS() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetIPv6TrafficClass() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetKeepAlive() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetLinger() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetMembership() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetNoDelay(int s, boolean enabled, int16 *perr) {
@@ -607,7 +607,7 @@ int OEMSocket_SetNoDelay(int s, boolean enabled, int16 *perr) {
 }
 
 int OEMSocket_SetRcvBuf() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetReuseAddr(int s, boolean enabled, int16 *perr) {
@@ -618,23 +618,23 @@ int OEMSocket_SetReuseAddr(int s, boolean enabled, int16 *perr) {
 }
 
 int OEMSocket_SetSACK() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetSDBAckCB() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetSndBuf() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetTCPMaxSegmentSize() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_SetTimeStamp() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMSocket_Shutdown(int s, int how, int16 *perr) {
@@ -650,6 +650,6 @@ int OEMSocket_Write(int s, const void *buf, int len, int16 *perr) {
 }
 
 int OEMSocket_Writev() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
