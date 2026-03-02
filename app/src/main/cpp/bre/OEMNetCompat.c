@@ -4,11 +4,68 @@
 #include "AEE.h"
 #endif
 
+#if __has_include(<errno.h>)
 #include <errno.h>
+#else
+extern int errno;
+#endif
+
+#if __has_include(<stddef.h>)
 #include <stddef.h>
+#else
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+#endif
+
+#if __has_include(<sys/socket.h>)
 #include <sys/socket.h>
+#endif
+
+#if __has_include(<netinet/tcp.h>)
 #include <netinet/tcp.h>
+#endif
+
+#if __has_include(<unistd.h>)
 #include <unistd.h>
+#endif
+
+/*
+ * Android Studio code-model fallback section:
+ * if the IDE cannot resolve NDK/BREW include paths, define the minimum
+ * surface so this translation unit can still be parsed.
+ */
+#ifndef boolean
+typedef unsigned char boolean;
+#endif
+
+#ifndef int16
+typedef short int16;
+#endif
+
+#ifndef uint16
+typedef unsigned short uint16;
+#endif
+
+#ifndef socklen_t
+typedef unsigned int socklen_t;
+#endif
+
+#ifndef SOL_SOCKET
+#define SOL_SOCKET 1
+#endif
+
+#ifndef SO_REUSEADDR
+#define SO_REUSEADDR 2
+#endif
+
+#ifndef IPPROTO_TCP
+#define IPPROTO_TCP 6
+#endif
+
+#ifndef TCP_NODELAY
+#define TCP_NODELAY 1
+#endif
 
 #ifndef SUCCESS
 #define SUCCESS 0
@@ -18,6 +75,25 @@
 #define EUNSUPPORTED 1
 #endif
 
+struct sockaddr;
+
+#if !__has_include(<sys/socket.h>)
+extern int accept(int, struct sockaddr *, socklen_t *);
+extern int bind(int, const struct sockaddr *, socklen_t);
+extern int close(int);
+extern int connect(int, const struct sockaddr *, socklen_t);
+extern int getpeername(int, struct sockaddr *, socklen_t *);
+extern int getsockname(int, struct sockaddr *, socklen_t *);
+extern int getsockopt(int, int, int, void *, socklen_t *);
+extern int listen(int, int);
+extern int recv(int, void *, size_t, int);
+extern int recvfrom(int, void *, size_t, int, struct sockaddr *, socklen_t *);
+extern int send(int, const void *, size_t, int);
+extern int sendto(int, const void *, size_t, int, const struct sockaddr *, socklen_t);
+extern int setsockopt(int, int, int, const void *, socklen_t);
+extern int shutdown(int, int);
+extern int socket(int, int, int);
+#endif
 /*
  * BREWPKMSM315SP02 compatibility shims.
  *
