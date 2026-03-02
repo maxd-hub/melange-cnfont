@@ -1,4 +1,23 @@
+#if __has_include(<AEE.h>)
 #include <AEE.h>
+#elif __has_include("AEE.h")
+#include "AEE.h"
+#endif
+
+#include <errno.h>
+#include <stddef.h>
+#include <sys/socket.h>
+#include <netinet/tcp.h>
+#include <unistd.h>
+
+#ifndef SUCCESS
+#define SUCCESS 0
+#endif
+
+#ifndef EUNSUPPORTED
+#define EUNSUPPORTED 1
+#endif
+
 /*
  * BREWPKMSM315SP02 compatibility shims.
  *
@@ -308,24 +327,32 @@ int OEMNet_GetAppProfileId() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_Accept() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_Accept(int s, struct sockaddr *addr, uint16 *paddrlen, int16 *perr) {
+    socklen_t len = paddrlen ? (socklen_t)(*paddrlen) : 0;
+    int rc = accept(s, addr, paddrlen ? &len : NULL);
+    if (paddrlen) *paddrlen = (uint16)len;
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_AsyncSelect() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_Bind() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_Bind(int s, const struct sockaddr *addr, int addrlen, int16 *perr) {
+    int rc = bind(s, addr, (socklen_t)addrlen);
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
-int OEMSocket_Close() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_Close(int s) {
+    return close(s);
 }
 
-int OEMSocket_Connect() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_Connect(int s, const struct sockaddr *addr, int addrlen, int16 *perr) {
+    int rc = connect(s, addr, (socklen_t)addrlen);
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_GetDelayedAck() {
@@ -364,20 +391,32 @@ int OEMSocket_GetNextEvent() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_GetNoDelay() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_GetNoDelay(int s, boolean *enabled, int16 *perr) {
+    int v = 0; socklen_t l = sizeof(v);
+    int rc = getsockopt(s, IPPROTO_TCP, TCP_NODELAY, &v, &l);
+    if (enabled) *enabled = (v != 0);
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
-int OEMSocket_GetPeerName() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_GetPeerName(int s, struct sockaddr *addr, uint16 *paddrlen, int16 *perr) {
+    socklen_t len = paddrlen ? (socklen_t)(*paddrlen) : 0;
+    int rc = getpeername(s, addr, paddrlen ? &len : NULL);
+    if (paddrlen) *paddrlen = (uint16)len;
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_GetRcvBuf() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_GetReuseAddr() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_GetReuseAddr(int s, boolean *enabled, int16 *perr) {
+    int v = 0; socklen_t l = sizeof(v);
+    int rc = getsockopt(s, SOL_SOCKET, SO_REUSEADDR, &v, &l);
+    if (enabled) *enabled = (v != 0);
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_GetSACK() {
@@ -396,8 +435,12 @@ int OEMSocket_GetSndBuf() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_GetSockName() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_GetSockName(int s, struct sockaddr *addr, uint16 *paddrlen, int16 *perr) {
+    socklen_t len = paddrlen ? (socklen_t)(*paddrlen) : 0;
+    int rc = getsockname(s, addr, paddrlen ? &len : NULL);
+    if (paddrlen) *paddrlen = (uint16)len;
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_GetTCPMaxSegmentSize() {
@@ -408,28 +451,40 @@ int OEMSocket_GetTimeStamp() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_Listen() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_Listen(int s, int backlog, int16 *perr) {
+    int rc = listen(s, backlog);
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
-int OEMSocket_Open() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_Open(int net_id, int family, int type, int protocol, void *reserved) {
+    (void)net_id;
+    (void)reserved;
+    return socket(family, type, protocol);
 }
 
-int OEMSocket_Read() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_Read(int s, void *buf, int len, int16 *perr) {
+    int rc = (int)recv(s, buf, (size_t)len, 0);
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_Readv() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_RecvFrom() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_RecvFrom(int s, void *buf, int len, int flags, struct sockaddr *from, uint16 *pfromlen, int16 *perr) {
+    socklen_t flen = pfromlen ? (socklen_t)(*pfromlen) : 0;
+    int rc = (int)recvfrom(s, buf, (size_t)len, flags, from, pfromlen ? &flen : NULL);
+    if (pfromlen) *pfromlen = (uint16)flen;
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
-int OEMSocket_SendTo() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_SendTo(int s, const void *buf, int len, int flags, const struct sockaddr *to, int tolen, int16 *perr) {
+    int rc = (int)sendto(s, buf, (size_t)len, flags, to, (socklen_t)tolen);
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_SetDelayedAck() {
@@ -464,16 +519,22 @@ int OEMSocket_SetMembership() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_SetNoDelay() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_SetNoDelay(int s, boolean enabled, int16 *perr) {
+    int v = enabled ? 1 : 0;
+    int rc = setsockopt(s, IPPROTO_TCP, TCP_NODELAY, &v, sizeof(v));
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_SetRcvBuf() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_SetReuseAddr() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_SetReuseAddr(int s, boolean enabled, int16 *perr) {
+    int v = enabled ? 1 : 0;
+    int rc = setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &v, sizeof(v));
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_SetSACK() {
@@ -496,12 +557,16 @@ int OEMSocket_SetTimeStamp() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMSocket_Shutdown() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_Shutdown(int s, int how, int16 *perr) {
+    int rc = shutdown(s, how);
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
-int OEMSocket_Write() {
-    return OEMNetCompat_Unsupported();
+int OEMSocket_Write(int s, const void *buf, int len, int16 *perr) {
+    int rc = (int)send(s, buf, (size_t)len, 0);
+    if (perr) *perr = (int16)errno;
+    return rc;
 }
 
 int OEMSocket_Writev() {
