@@ -463,7 +463,10 @@ int OEMSocket_GetLinger() {
     return OEMNetCompat_Success();
 }
 
-int OEMSocket_GetNativeDescriptor() {
+int OEMSocket_GetNativeDescriptor(int s, int *pNativeDesc) {
+    if (pNativeDesc) {
+        *pNativeDesc = s;
+    }
     return OEMNetCompat_Success();
 }
 
