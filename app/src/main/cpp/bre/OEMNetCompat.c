@@ -47,7 +47,7 @@ typedef short int16;
 typedef unsigned short uint16;
 #endif
 
-#ifndef socklen_t
+#if !__has_include(<sys/socket.h>) && !__has_include(<sys/types.h>)
 typedef unsigned int socklen_t;
 #endif
 
