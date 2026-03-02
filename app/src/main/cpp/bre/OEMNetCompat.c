@@ -107,20 +107,24 @@ static int OEMNetCompat_Unsupported(void) {
     return EUNSUPPORTED;
 }
 
+static int OEMNetCompat_Success(void) {
+    return SUCCESS;
+}
+
 int OEMNet_CloseAllNets() {
     return SUCCESS;
 }
 
 int OEMNet_Close() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_CloseSiblingNets() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_DeRegisterFromMTPD() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_DeletePrivAddrInfo() {
@@ -140,7 +144,7 @@ int OEMNet_GetBearerTechnologyOpts() {
 }
 
 int OEMNet_GetDefaultNetwork() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_GetGrantedQoSFlowSpecDuringAnyState() {
@@ -236,23 +240,23 @@ int OEMNet_ModifyQoS() {
 }
 
 int OEMNet_MyIPAddr() {
-    return OEMNetCompat_Unsupported();
+    return 0;
 }
 
 int OEMNet_Open() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_PPPClose() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_PPPOpen() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_PPPState() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_QoSBundleDeactivate() {
@@ -272,7 +276,7 @@ int OEMNet_QoSGoActive() {
 }
 
 int OEMNet_RegisterToMTPD() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_ReleaseQoS() {
@@ -292,7 +296,7 @@ int OEMNet_RequestQoSBundle() {
 }
 
 int OEMNet_SetBearerTechnologyChangeWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetDormancyTimeout() {
@@ -304,39 +308,39 @@ int OEMNet_SetHystActTimer() {
 }
 
 int OEMNet_SetIPv6PrefixUpdateWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetIPv6PrivAddrWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetMTPDWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetMcastWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetNetWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetOutageWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetPrimaryQoSModifyResultWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetPrimaryQoSModifyWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetQoSAwareUnawareWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetQoSDormancyTimeout() {
@@ -344,15 +348,15 @@ int OEMNet_SetQoSDormancyTimeout() {
 }
 
 int OEMNet_SetQoSProfilesChangedWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetQoSWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetSocketWaiter() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_GetHWAddr() {
@@ -360,11 +364,11 @@ int OEMNet_GetHWAddr() {
 }
 
 int OEMNet_GetLastNetDownReason() {
-    return OEMNetCompat_Unsupported();
+    return 0;
 }
 
 int OEMNet_GetPPPAuth() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_GetRLP3Cfg() {
@@ -384,7 +388,7 @@ int OEMNet_GetUrgent() {
 }
 
 int OEMNet_NameServers() {
-    return OEMNetCompat_Unsupported();
+    return OEMNetCompat_Success();
 }
 
 int OEMNet_SetDDTMPref() {
