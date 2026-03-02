@@ -102,6 +102,7 @@ add_library(brewemu SHARED
         bre/OEMCriticalSection.c
         bre/OEMTAPI.c
         bre/OEMSysClock.c
+        bre/OEMNetCompat.c
         bre/ARMLegacyABI.S
         bre/OEMAddrBook.c
         bre/OEMMediaCMidi.cpp
