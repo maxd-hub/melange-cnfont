@@ -77,6 +77,15 @@ typedef unsigned int socklen_t;
 
 struct sockaddr;
 
+typedef struct OEMNetCompatNameServer {
+    int16 family;
+    uint16 reserved;
+    unsigned int addr;
+    unsigned int unused0;
+    unsigned int unused1;
+    unsigned int unused2;
+} OEMNetCompatNameServer;
+
 #if !__has_include(<sys/socket.h>)
 extern int accept(int, struct sockaddr *, socklen_t *);
 extern int bind(int, const struct sockaddr *, socklen_t);
@@ -143,7 +152,10 @@ int OEMNet_GetBearerTechnologyOpts() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMNet_GetDefaultNetwork() {
+int OEMNet_GetDefaultNetwork(int type, int *pNetId) {
+    if (pNetId) {
+        *pNetId = type;
+    }
     return OEMNetCompat_Success();
 }
 
@@ -387,7 +399,25 @@ int OEMNet_GetUrgent() {
     return OEMNetCompat_Unsupported();
 }
 
-int OEMNet_NameServers() {
+int OEMNet_NameServers(int netId, OEMNetCompatNameServer *pServers, unsigned int *pCount) {
+    (void)netId;
+    if (!pCount) {
+        return OEMNetCompat_Unsupported();
+    }
+
+    if (*pCount == 0 || !pServers) {
+        *pCount = 0;
+        return OEMNetCompat_Success();
+    }
+
+    pServers[0].family = 2; /* AF_INET */
+    pServers[0].reserved = 0;
+    pServers[0].addr = 0x08080808; /* 8.8.8.8 */
+    pServers[0].unused0 = 0;
+    pServers[0].unused1 = 0;
+    pServers[0].unused2 = 0;
+
+    *pCount = 1;
     return OEMNetCompat_Success();
 }
 
