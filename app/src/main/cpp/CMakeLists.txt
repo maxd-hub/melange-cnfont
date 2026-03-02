@@ -79,7 +79,6 @@ set_property(TARGET aeeaddrbk PROPERTY IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_
 add_library(brewemu SHARED
         breABI.c
 
-        bre/AEENet.c
         bre/AEEMediaUtil.c
         bre/OEMRan.c
         bre/OEMOS.c
@@ -103,6 +102,7 @@ add_library(brewemu SHARED
         bre/OEMCriticalSection.c
         bre/OEMTAPI.c
         bre/OEMSysClock.c
+        bre/OEMNetCompat.c
         bre/ARMLegacyABI.S
         bre/OEMAddrBook.c
         bre/OEMMediaCMidi.cpp
@@ -232,7 +232,7 @@ target_link_libraries(brewemu
         aeesecurity
         aeersa
         aeeweb
-        #aeenet
+        aeenet
         aeecontrols
         aeemenu
         aeeijg
